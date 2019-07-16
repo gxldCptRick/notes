@@ -30,3 +30,32 @@ header {
 p {
   text-indent: 30px;
 }
+@media screen and (min-width: 800px) {
+  nav.main-nav > ul {
+    display: flex;
+    flex-flow: row;
+    margin: 1%;
+  }
+}
+
+nav.main-nav > ul {
+  list-style: none;
+  background-color: black;
+}
+
+nav.main-nav > ul > li {
+  padding: 1%;
+  color: white;
+}
+
+nav.main-nav > ul > li:hover {
+  background-color: #444;
+}
+
+nav.main-nav > ul > li > a {
+  color: inherit;
+}
+
+nav.main-nav > ul > li > a:visited {
+  color: #888;
+}

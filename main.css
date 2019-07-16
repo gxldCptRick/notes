@@ -10,6 +10,23 @@ h5 {
   font-family: "Montserrat", sans-serif;
 }
 
+h2,
+h3,
+h4,
+h5 {
+  color: white;
+  background: black;
+  padding: 1%;
+}
+
+nav.topics ul {
+  list-style-type: none;
+}
+
+nav.topics ul li {
+  margin: 10px 0;
+}
+
 body {
   background: white;
 }

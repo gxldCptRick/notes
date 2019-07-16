@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Java 2 Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link href="main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>Java 2 Notes</h1>
+      <h2>What we covered</h2>
+      <nav>
+        <ul>
+          <li><a href="#new-assignment">New Assignment</a></li>
+          <li><a href="#pass-offs">Pass off Time</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="new-assignment">
+        <h3>Airport Web App</h3>
+        <h4>
+          <a href="https://lms.neumont.edu/courses/2590500/assignments/22763369"
+            >The LMS Assignment</a
+          >
+        </h4>
+        <ul>
+          <li><a href="#web-app-requirements">Requirements</a></li>
+          <li><a href="#web-app-gotchas">What to watch out for</a></li>
+        </ul>
+        <p>
+          We got an assignment that basically is to create a flight website. So
+          we will need to create users and any user that registers with our site
+          will be an admin. Most of his document he refers to users as anyone
+          who is actually going to our site whether or not they are currently
+          logged in. Admins are just users who are logged in. That means that
+          anybody who signs up to the site will be able to create flights delete
+          flights and etc... We all agreed that in a real app this would be
+          hilariously bad.
+        </p>
+        <section id="web-app-requirements">
+          <ul>
+            <li>Everyone should be able to purchase a ticket on the website</li>
+            <li>
+              Only admins will be able to create flights to make purchases from
+            </li>
+            <li>
+              The airports will be a predefined set of airports and does not
+              need to change during the runtime of the application
+            </li>
+            <li>
+              When signing up a user you need to have all the following: full
+              name, email, street address, phone, the number of seats the are
+              purchasing, and payment info
+            </li>
+          </ul>
+        </section>
+
+        <section id="web-app-gotchas">
+          <h4>Gotchas to look out for</h4>
+          <ul>
+            <li><a href="#time-in-trouble">The Timezones</a></li>
+            <li><a href="#credit-cards">Credit Cards</a></li>
+          </ul>
+          <section id="time-in-trouble">
+            <h5>The Timezones</h5>
+            <p>
+              So for the timezone be careful because he wants the arrival and
+              departure times to be in the timezone of the airport that they are
+              going to travel to. So that means if you are going from Salt Lake
+              City to New York you will have to have the departure time be in
+              MST and the arrival should be in EST. He said that we can use any
+              external libraries for helping with the date-time stuff
+            </p>
+          </section>
+          <section id="credit-cards">
+            <h5>Credit Cards</h5>
+            <p>
+              So for credit cards we have to keep them secure so that means no
+              storing the fake CSV's and only storing the last 4 digits of the
+              card. Mr. Cox is very insistent that we do not use any real credit
+              card information. He also told us that to validate it would be
+              just making sure that it isn't expired and that its number starts
+              with a 9 so it should be easy enough to work.
+            </p>
+          </section>
+        </section>
+      </section>
+      <section id="pass-offs">
+        <h3>Pass Off Time</h3>
+        <p>
+          After class all we did was just pass off and work on stuff for the day
+          mostly getting started on that new assignment thought so nothing
+          special.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

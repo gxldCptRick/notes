@@ -37,7 +37,15 @@ p {
     margin: 1%;
   }
 }
+h2.back-again a {
+  background: black;
+}
 
+h2.back-again a {
+  padding: 1%;
+  margin: 2%;
+  text-decoration: none;
+}
 nav.main-nav > ul {
   list-style: none;
   background-color: black;
@@ -58,4 +66,22 @@ nav.main-nav > ul > li > a {
 
 nav.main-nav > ul > li > a:visited {
   color: #888;
+}
+
+main {
+  margin: 0 0 50px 0;
+}
+
+ul.notes {
+  list-style: none;
+}
+
+ul.notes a {
+  margin: 1%;
+  padding: 1%;
+}
+
+ul.notes a:hover {
+  background: black;
+  color: white;
 }

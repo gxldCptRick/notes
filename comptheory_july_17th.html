@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Computational Theory Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link href="main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>July 17th 2019</h1>
+      <h2>What we covered</h2>
+      <nav class="topics">
+        <ul>
+          <li><a href="#quiz">Non Deterministic Quiz</a></li>
+          <li><a href="#ndm">Non Deterministic Practice</a></li>
+          <li>
+            <a href="#converting"
+              >Steps to Convert a Non Deterministic to Deterministic</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="quiz">
+        <h3>Non Deterministic Quiz</h3>
+        <p>
+          So we took a quiz to try to wrap up the chapter 5 reading assignment.
+          I am not gonna lie it was actually a really cool reading machine. I
+          don't want to spoil it for you because you are going to take it but
+          just know it is the most needlessly complicated machine I have ever
+          seen.
+        </p>
+      </section>
+      <section id="ndm">
+        <h3>Non Deterministic Practice</h3>
+        <p>
+          We worked on practicing more ndm's or whatever you want to call them.
+          The machine we did was a machine that had an alphabet alright of
+          &#8721; { 0 , 1} and it had to meet one or both of these conditions.
+          It had to be an odd amount of zeros or a non multiple of 3 amount of
+          1s or both.
+        </p>
+        <div class="frame">
+          <img src="./resources/solution.jpg" alt="damon's state machine" />
+          <caption>
+            The machine Damon made that I helped with
+          </caption>
+        </div>
+        <p>
+          Me, Damon, and Fermin worked together to try to figure it out and we
+          came up with this. it is almost good it just accepts the double
+          <code>"00"</code> but other than that we did pretty good.
+        </p>
+        <div class="frame">
+          <img
+            src="https://i.imgur.com/wideBbc.png"
+            alt="the actual solution"
+          />
+          <caption>
+            The actual answer from the class
+          </caption>
+        </div>
+      </section>
+      <section id="converting">
+        <h3>Steps to Convert a Non Deterministic to Deterministic</h3>
+        <p>
+          We walked through converting a simple Non Deterministic Machine into a
+          Deterministic Machine. The machine we worked on was basically working
+          on the regex <code>(01)* + (010)*</code>
+        </p>
+        <div class="frame">
+          <img
+            src="https://i.imgur.com/DXUQYx5.png"
+            alt="the non deterministic machine we are working on."
+          />
+          <caption>
+            The machine that is described by that regex
+          </caption>
+        </div>
+        <p>
+          We start the process by looking that the starting state and then
+          looking at the alphabet and just going through each of the symbols and
+          then build out the connections to the states however if a symbol leads
+          to multiple states then you combine those states into a new mega state
+          that uses all three of them.
+        </p>
+        <div class="frame">
+          <img
+            src="https://i.imgur.com/Z4Ixfkb.png"
+            alt="The next step with the initial states and then building out the routes from it."
+          />
+          <caption>
+            The example image that he showed us.
+          </caption>
+        </div>
+        <p>
+          Since we have processed all the symbols for the initial state we move
+          to the mega state and start looking at the diagram again. We then see
+          that both states of B and C fail when they take in 0 so that means
+          that we can just go to the fail trap state on 0. Then we go to the
+          next symbol of 1 and then ask the question what does B go to and we
+          see that it goes to A then we ask the question what does C go to on 1
+          and then we see that it goes to D. We combine those states again to
+          make a mega state. The thing is that since this state contains at
+          least one accept state the entire thing becomes an accept state.
+        </p>
+        <div class="frame">
+          <img
+            src="https://i.imgur.com/q1OsZf3.png"
+            alt="the next slide where we decide what to move to next"
+          />
+          <caption>
+            The next diagram that he showed us to help us understand the
+            connections.
+          </caption>
+        </div>
+        <p>
+          We then go on to the AD state and then rinse and repeat this process
+          again. We look at what A goes to when it is zero and we see it goes to
+          both B and C. Then we look at what D goes to when given 0 and we see
+          that it goes to A. We then create a mega state consisting of ABC and
+          have an arrow for 0. We then ask again like last time where does a go
+          given 1 and see that it fails on that input. Then we ask again for D
+          and it fails on 1 that means we can just lead to the fail state. After
+          that we go to the Mega ABC state and then just like last time we go
+          back and forth with one symbol going through each mini state in the
+          mega state we then see that it goes back to the BC fail because those
+          both fail on zero and Goes back to the AD state on 1 because both BC
+          go to AD respectively
+        </p>
+        <div class="frame">
+          <img
+            src="https://i.imgur.com/aLoS6JP.png
+          "
+            alt="the last state being added."
+          />
+          <caption>
+            The final state and finished diagram.
+          </caption>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <h2 class="back-again"><a href="./index.html">Go Back</a></h2>
+    </footer>
+  </body>
+</html>

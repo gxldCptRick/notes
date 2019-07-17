@@ -47,13 +47,15 @@ header {
 p {
   text-indent: 30px;
 }
-@media screen and (min-width: 800px) {
-  nav.main-nav > ul {
-    display: flex;
-    flex-flow: row;
-    margin: 1%;
-  }
+
+div.frame {
+  width: 100%;
 }
+
+div.frame img {
+  width: 100%;
+}
+
 h2.back-again a {
   background: black;
 }
@@ -101,4 +103,17 @@ ul.notes a {
 ul.notes a:hover {
   background: black;
   color: white;
+}
+
+@media screen and (min-width: 800px) {
+  nav.main-nav > ul {
+    display: flex;
+    flex-flow: row;
+    margin: 1%;
+  }
+
+  div.frame {
+    margin: 0 auto;
+    width: 50%;
+  }
 }

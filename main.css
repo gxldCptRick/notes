@@ -11,9 +11,83 @@ h5 {
   font-family: "Montserrat", sans-serif;
 }
 
-div.code {
+div.code,
+pre code {
   display: inline;
   font-family: "Share Tech Mono", monospace;
+}
+
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 1%;
+}
+span.code-keyword {
+  color: #df7700;
+}
+
+.inline-code {
+  font-size: 1.1em;
+}
+
+span.code-doctype-value {
+  color: #999;
+}
+
+span.code-tag-name {
+  color: #aa0033;
+}
+
+span.code-special {
+  color: #750035;
+}
+
+span.code-doctype {
+  color: #666;
+}
+
+span.code-primitive {
+  color: #171be8;
+}
+
+span.code-jsp-tag {
+  color: #e6b449;
+}
+
+span.code-attribute {
+  color: #62017a;
+}
+
+span.code-tag {
+  color: blue;
+}
+
+span.code-this {
+  color: #0e1d80;
+}
+
+span.code-annotation {
+  color: #3300aa;
+}
+
+span.code-string {
+  color: green;
+}
+
+span.code-comment {
+  color: #555;
+}
+
+span.code-new {
+  color: #c001af;
+}
+span.code-identifier {
+  color: #3300aa;
+}
+
+span.code-class {
+  color: #0000aa;
 }
 
 h2,

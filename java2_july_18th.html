@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Java 2 Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+SansShare+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link href="main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>July 18th 2019</h1>
+      <h2>Topics Covered</h2>
+      <nav class="topics">
+        <ul>
+          <li>
+            <a href="#industry-standards">Industry Standards For Servlets</a>
+          </li>
+          <li><a href="#timezones">Time Zones</a></li>
+          <li><a href="#code-example">A Useful Code Example</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="industry-standards">
+        <h3>Industry Standards For Servlets</h3>
+        <p>
+          So Mr. Cox talked about the industry standards for servlets and
+          mentioned that some of us did multiple routes for the calculator
+          assignment. He said that for that assignment it was okay however it
+          wasn't what most people would not consider it best practice. He went
+          on to suggest instead to create a base servlet calculator class that
+          each of the routes can inherit from and then have some way for the
+          children to override some behavior in it so you can share the operand
+          code but still do the operations for each of them.
+        </p>
+      </section>
+      <section id="timezones">
+        <h3>Time Zones</h3>
+        <p>
+          We went on to clarify what he meant by timezones. So when you create
+          the flight you will set the departure time in terms of the airports
+          timezone and then we would pick a destination and then set the amount
+          of time that the flight will take and save both of those for the
+          assignment.
+        </p>
+        <p>
+          He went on to suggest that if it were him he would design a flight
+          class with both a destination and departure airports. It would also
+          have a departure time and save that in Epoch Milliseconds so that it
+          can be tied to no timezones. Then he would just make sure that each
+          airport object would know what timezones they are in.
+        </p>
+      </section>
+      <section id="code-example">
+        <h3>Code Example For Dynamic Content</h3>
+        <p>
+          So we asked a couple of good questions about how we are supposed to
+          display a collection of flights and so he created a demo for us to use
+          as a base for a displaying a list of students
+        </p>
+        <h4>The example Servlet That serves a list of students</h4>
+        <pre>
+          <code>
+   <span class="code-annotation">@WebServlet</span>(<span class="code-string">"/students"</span>) 
+   <span class="code-keyword">public class</span> <span class="code-class">ListStudents</span> <span class="code-keyword">extends</span> <span class="code-class">HttpServlet</span> { 
+       <span class="code-keyword">public void</span> <span class="code-identifier">doGet</span>(<span class="code-class">HttpServletRequest</span> <span class="code-identifier">req</span>, <span class="code-class">HttpServlet</span> <span class="code-identifier">resp</span>){
+         <span class="code-comment">// fetching data so that we can put into the view.</span>
+         <span class="code-class">List</span>&lt;<span class="code-class">Student</span>&gt; <span class="code-identifier">students</span> = <span class="code-new">new</span> <span class="code-class">ArrayList</span>&lt;&gt;();
+         <span class="code-identifier">students</span>.add(<span class="code-new">new</span> <span class="code-class">Student</span>(<span class="code-string">"Joe"</span>, 10));
+         <span class="code-identifier">students</span>.add(<span class="code-new">new</span> <span class="code-class">Student</span>(<span class="code-string">"Jane"</span>, 12));
+         <span class="code-identifier">req</span>.setAttribute(<span class="code-string">"students"</span>, <span class="code-identifier">students</span>);
+         <span class="code-comment">// sends back to the view so that it can render the list</span>
+         <span class="code-identifier">req</span>.getRequestDispatcher(<span class="code-string">"displayStudentsList.jsp"</span>)
+           .forward(<span class="code-identifier">req</span>, <span class="code-identifier">res</span>);
+       }
+   }
+          </code>
+        </pre>
+        <p>
+          This is a simple servlet that gets a the list of
+          <span class="code-class inline-code"><code>Student</code></span
+          >s and then stores it in the req object so that we can retrieve it in
+          the later on in the jsp page and be able to list them all out and then
+          dispatches a request to the jsp container to load into the display jsp
+          and have that handle the rest of the request. Mr. Cox wanted to let us
+          know that once you start writing to the output stream for the response
+          you will no longer be able to dispatch to another jsp because it will
+          have already sent the headers for the request and so yeah.
+        </p>
+        <pre>
+          <code>
+   <span class="code-comment">// this is a simple pojo that we will use for demo purposes</span> 
+   <span class="code-keyword">public class</span> <span class="code-class">Student</span> {
+       <span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-identifier">name</span>;
+       <span class="code-keyword">public</span> <span class="code-primitive">int</span> <span class="code-identifier">age</span>;
+       <span class="code-comment">// default constructor for frameworks to use.</span>
+       <span class="code-keyword">public</span> <span class="code-class">Student</span>(){}
+   
+       <span class="code-keyword">public</span> <span class="code-class">Student</span>(<span class="code-class">String</span> <span class="code-identifier">name</span>, <span class="code-primitive">int</span> <span class="code-identifier">age</span>){
+           <span class="code-this">this</span>.<span class="code-identifier">name</span> = <span class="code-identifier">name</span>; 
+           <span class="code-this">this</span>.<span class="code-identifier">age</span> = <span class="code-identifier">age</span>;
+       }
+   }
+          </code>
+      </pre>
+        <p>
+          This is the the model that we will be using for the displaying
+          purposes. All it is just two properties so we can quickly mock up how
+          that will display in the html and what not.
+        </p>
+        <pre>
+          <code>
+<span class="code-jsp-tag">&lt;%@ <span class="code-keyword">page</span> <span class="code-attribute">language</span>=<span class="code-string">"java"</span> <span class="code-attribute">content</span>=<span class="code-string">"text/html; charset=ISO-8859-1"</span> <span class="code-attribute">pageEncoding</span>=<span class="code-string">"ISO-8859-1"</span> %&gt;</span>
+<span class="code-jsp-tag">&lt;%@ <span class="code-keyword">page</span> <span class="code-attribute">import</span>=<span class="code-string">"java.util.List"</span> %&gt;</span>
+<span class="code-jsp-tag">&lt;%@ <span class="code-keyword">page</span> <span class="code-attribute">import</span>=<span class="code-string">"package.where.student.lives.Student"</span> %&gt;</span>
+
+<span class="code-doctype">&lt;!DOCTYPE <span  class="code-doctype-value">html</span>&gt;</span>
+<span class="code-tag">&lt;<span class="code-tag-name">html</span> <span class="code-attribute">lang</span>=<span class="code-string">"en"</span>&gt;</span>
+    <span class="code-tag">&lt;<span class="code-tag-name">head</span>&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">title</span>&gt;</span>Example List Students<span class="code-tag">&lt;/<span class="code-tag-name">title</span>&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">meta</span> <span class="code-attribute">charset</span>=<span class="code-string">"UTF-8"</span>/&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">meta</span> <span class="code-attribute">name</span>=<span class="code-string">"viewport"</span> <span class="code-attribute">content</span>=<span class="code-string">"width=device-width, initial-scale=1"</span>/&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">link</span> <span class="code-attribute">href</span>=<span class="code-string">"css/style.css"</span> <span class="code-attribute">rel</span>=<span class="code-string">"stylesheet"</span>/&gt;</span>
+    <span class="code-tag">&lt;/<span class="code-tag-name">head</span>&gt;</span>
+    <span class="code-tag">&lt;<span class="code-tag-name">body</span>&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">h2</span>&gt;</span>Students<span class="code-tag">&lt;/<span class="code-tag-name">h2</span>&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">ul</span>&gt;</span>
+          <span class="code-jsp-tag">&lt;%</span> <span class="code-special">for</span>(<span class="code-class">Student</span> <span class="code-identifier">student</span>: (<span class="code-class">List</span>&lt;<span class="code-class">Student</span>&gt;) <span class="code-identifier">request</span>.getAttribute(<span class="code-string">"students"</span>)) { <span class="code-jsp-tag">%&gt;</span>
+              <span class="code-tag">&lt;<span class="code-tag-name">li</span>&gt;</span> <span class="code-jsp-tag">&lt;%=</span> <span class="code-identifier">student</span>.<span class="code-identifier">name</span> <span class="code-jsp-tag">%&gt;</span> (<span class="code-jsp-tag">&lt;%=</span> <span class="code-identifier">student</span>.<span class="code-identifier">age</span> <span class="code-jsp-tag">%&gt;</span>) <span class="code-tag">&lt;/<span class="code-tag-name">li</span>&gt;</span>
+          <span class="code-jsp-tag">&lt;%</span> } <span class="code-jsp-tag">%&gt;</span>
+        <span class="code-tag">&lt;/<span class="code-tag-name">ul</span>&gt;</span>
+    <span class="code-tag">&lt;/<span class="code-tag-name">body</span>&gt;</span>
+<span class="code-tag">&lt;/<span class="code-tag-name">html</span>&gt;</span>
+          </code>
+        </pre>
+        <p>
+          This is the jsp page that we created as you can see it is pretty
+          simple and straight forward. All we have to do is get the list of
+          students that we stashed in the request object and cast it back into a
+          list. We then iterate over the list just like we would in an Asp.Net
+          MVC Razor page and then pick and choose the properties that we want to
+          display and how to display them. As you can see we used the simple
+          short hand of
+          <code><span class="code-jsp-tag">&lt;%= %&gt</span></code> to be able
+          to just evaluate the expression and put whatever gets returned into a
+          string that we write out to the response.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <h2 class="back-again"><a href="./index.html">Go Back</a></h2>
+    </footer>
+  </body>
+</html>

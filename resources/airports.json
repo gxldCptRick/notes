@@ -1,0 +1,242 @@
+[
+  {
+    "id": "1",
+    "name": "Hartsfield Jackson Atlanta International Airport",
+    "iata code": "ATL",
+    "major city": "Atlanta",
+    "state": "GA",
+    "timezone": "EST"
+  },
+  {
+    "id": "2",
+    "name": "Los Angeles International Airport",
+    "iata code": "LAX",
+    "major city": "Los Angeles",
+    "state": "CA",
+    "timezone": "PST"
+  },
+  {
+    "id": "3",
+    "name": "O'Hare International Airport",
+    "iata code": "ORD",
+    "major city": "Chicago",
+    "state": "IL",
+    "timezone": "CST"
+  },
+  {
+    "id": "4",
+    "name": "Dallas/Fort Worth International Airport",
+    "iata code": "DFW",
+    "major city": "Dallas/Fort Worth",
+    "state": "TX",
+    "timezone": "CST"
+  },
+  {
+    "id": "5",
+    "name": "Denver International Airport",
+    "iata code": "DEN",
+    "major city": "Denver",
+    "state": "CO",
+    "timezone": "MST"
+  },
+  {
+    "id": "6",
+    "name": "John F. Kennedy International Airport",
+    "iata code": "JFK",
+    "major city": "New York",
+    "state": "NY",
+    "timezone": "EST"
+  },
+  {
+    "id": "7",
+    "name": "San Francisco International Airport",
+    "iata code": "SFO",
+    "major city": "San Francisco",
+    "state": "CA",
+    "timezone": "PST"
+  },
+  {
+    "id": "8",
+    "name": "McCarran International Airport",
+    "iata code": "LAS",
+    "major city": "Las Vegas",
+    "state": "NV",
+    "timezone": "PST"
+  },
+  {
+    "id": "9",
+    "name": "Seattle Tacoma International Airport",
+    "iata code": "SEA",
+    "major city": "Seattle/Tacoma",
+    "state": "WA",
+    "timezone": "PST"
+  },
+  {
+    "id": "10",
+    "name": "Charlotte Douglas International Airport",
+    "iata code": "CLT",
+    "major city": "Charlotte",
+    "state": "NC",
+    "timezone": "EST"
+  },
+  {
+    "id": "11",
+    "name": "Newark Liberty International Airport",
+    "iata code": "EWR",
+    "major city": "New York/Newark",
+    "state": "NJ",
+    "timezone": "EST"
+  },
+  {
+    "id": "12",
+    "name": "Orlando International Airport",
+    "iata code": "MCO",
+    "major city": "Orlando",
+    "state": "FL",
+    "timezone": "EST"
+  },
+  {
+    "id": "13",
+    "name": "Phoenix Sky Harbor International Airport",
+    "iata code": "PHX",
+    "major city": "Phoenix",
+    "state": "AZ",
+    "timezone": "MST"
+  },
+  {
+    "id": "14",
+    "name": "Miami International Airport",
+    "iata code": "MIA",
+    "major city": "Miami",
+    "state": "FL",
+    "timezone": "EST"
+  },
+  {
+    "id": "15",
+    "name": "George Bush Intercontinental Airport",
+    "iata code": "IAH",
+    "major city": "Houston",
+    "state": "TX",
+    "timezone": "CST"
+  },
+  {
+    "id": "16",
+    "name": "Logan International Airport",
+    "iata code": "BOS",
+    "major city": "Boston",
+    "state": "MA",
+    "timezone": "EST"
+  },
+  {
+    "id": "17",
+    "name": "Minneapolis Saint Paul International Airport",
+    "iata code": "MSP",
+    "major city": "Minneapolis/St. Paul",
+    "state": "MN",
+    "timezone": "CST"
+  },
+  {
+    "id": "18",
+    "name": "Detroit Metropolitan Airport",
+    "iata code": "DTW",
+    "major city": "Detroit",
+    "state": "MI",
+    "timezone": "EST"
+  },
+  {
+    "id": "19",
+    "name": "Fort Lauderdale Hollywood International Airport",
+    "iata code": "FLL",
+    "major city": "Fort Lauderdale",
+    "state": "FL",
+    "timezone": "EST"
+  },
+  {
+    "id": "20",
+    "name": "Philadelphia International Airport",
+    "iata code": "PHL",
+    "major city": "Philadelphia",
+    "state": "PA",
+    "timezone": "EST"
+  },
+  {
+    "id": "21",
+    "name": "LaGuardia Airport",
+    "iata code": "LGA",
+    "major city": "New York",
+    "state": "NY",
+    "timezone": "EST"
+  },
+  {
+    "id": "22",
+    "name": "Baltimore Washington International Airport",
+    "iata code": "BWI",
+    "major city": "Baltimore/Washington D.C.",
+    "state": "MD",
+    "timezone": "EST"
+  },
+  {
+    "id": "23",
+    "name": "Salt Lake City International Airport",
+    "iata code": "SLC",
+    "major city": "Salt Lake City",
+    "state": "UT",
+    "timezone": "MST"
+  },
+  {
+    "id": "24",
+    "name": "Ronald Reagan Washington National Airport",
+    "iata code": "DCA",
+    "major city": "Washington D.C.",
+    "state": "VA",
+    "timezone": "EST"
+  },
+  {
+    "id": "25",
+    "name": "Washington Dulles International Airport",
+    "iata code": "IAD",
+    "major city": "Washington D.C.",
+    "state": "VA",
+    "timezone": "EST"
+  },
+  {
+    "id": "26",
+    "name": "San Diego International Airport",
+    "iata code": "SAN",
+    "major city": "San Diego",
+    "state": "CA",
+    "timezone": "PST"
+  },
+  {
+    "id": "27",
+    "name": "Midway International Airport",
+    "iata code": "MDW",
+    "major city": "Chicago",
+    "state": "IL",
+    "timezone": "CST"
+  },
+  {
+    "id": "28",
+    "name": "Tampa International Airport",
+    "iata code": "TPA",
+    "major city": "Tampa",
+    "state": "FL",
+    "timezone": "EST"
+  },
+  {
+    "id": "29",
+    "name": "Daniel K. Inouye International Airport",
+    "iata code": "HNL",
+    "major city": "Honolulu",
+    "state": "HI",
+    "timezone": "HST"
+  },
+  {
+    "id": "30",
+    "name": "Portland International Airport",
+    "iata code": "PDX",
+    "major city": "Portland",
+    "state": "OR",
+    "timezone": "PST"
+  }
+]

@@ -28,6 +28,15 @@ span.code-keyword {
   color: #df7700;
 }
 
+iframe.json-view {
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  border: solid 1px black;
+}
+
 .inline-code {
   font-size: 1.1em;
 }

@@ -109,6 +109,53 @@
       </section>
       <section id="jpa-entity-manager">
         <h3>JPA Entity Manager</h3>
+        <p>
+          After that we got started on setting up the JPA Entity Manager stuff.
+          The thing is that Mr. Cox couldn't figure out why the Entity Manager
+          could not find the configuration file it needed to make it work. He
+          also published an announcement with the file info if you want to check
+          it out. Because of that we actually didn't get it all the things setup
+          today and he was planning on getting it done by the time we would have
+          a next assignment. So theoretically it would work if you add the
+          persistance.xml inside of the META-INF folder.
+        </p>
+        <a href="../resources/persistance.xml">Link To Persistance</a>
+        <a
+          href="https://lms.neumont.edu/courses/2590500/discussion_topics/15275753"
+          >Link to Announcement</a
+        >
+        <pre>
+          <code>
+<span class="code-tag">&lt;<span class="code-tag-name">persistence</span> <span class="code-attribute">xmlns</span>=<span class="code-string">"http://xmlns.jcp.org/xml/ns/persistence"</span> <span class="code-attribute">xmlns</span>:<span class="code-attribute">xsi</span>=<span class="code-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="code-attribute">xsi</span>:<span class="code-attribute">schemaLocation</span>=<span class="code-string">"http://xmlns.jcp.org/xml/ns/persistence
+http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"</span> <span class="code-attribute">version</span>=<span class="code-string">"2.1"</span>&gt;</span>
+    <span class="code-tag">&lt;<span class="code-tag-name">persistence-unit</span> <span class="code-attribute">name</span>=<span class="code-string">"ps"</span>&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">description</span>&gt;</span>
+          Hibernate Entity Manager Example
+        <span class="code-tag">&lt;/<span class="code-tag-name">description</span>&gt;</span>
+        <span class="code-comment">&lt;!-- using entity manager with hibernate  --&gt;</span>
+        <span class="code-comment">&lt;!-- hibernate is implementation we will be using of the JPA --&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">provider</span>&gt;</span>
+          org.hibernate.jpa.HibernatePersistenceProvider
+        <span class="code-tag">&lt;/<span class="code-tag-name">provider</span>&gt;</span>
+        <span class="code-tag">&lt;<span class="code-tag-name">properties</span>&gt;</span>
+            <span class="code-comment">&lt;!-- tells hibernate how to connect --&gt;</span>
+            <span class="code-comment">&lt;!-- this is where you driver is --&gt;</span>
+            <span class="code-tag">&lt;<span class="code-tag-name">property</span> <span class="code-attribute">name</span>=<span class="code-string">"javax.persistence.jdbc.driver"</span> <span class="code-attribute">value</span>=<span class="code-string">"org.mariadb.jdbc.Driver"</span> /&gt;</span>
+            <span class="code-comment">&lt;!-- this is the url to connect with. --&gt;</span>
+            <span class="code-comment">&lt;!-- mariadb connects by default on 3306 but we can specify a different port --&gt;</span>
+            <span class="code-tag">&lt;<span class="code-tag-name">property</span> <span class="code-attribute">name</span>=<span class="code-string">"javax.persistence.jdbc.url"</span> <span class="code-attribute">value</span>=<span class="code-string">"jdbc:mariadb://localhost:3307/CSC280_people"</span> /&gt;</span>
+            <span class="code-comment">&lt;!-- setting the username --&gt;</span>
+            <span class="code-tag">&lt;<span class="code-tag-name">property</span> <span class="code-attribute">name</span>=<span class="code-string">"javax.persistence.jdbc.user"</span> <span class="code-attribute">value</span>=<span class="code-string">"CSC280_people"</span> /&gt;</span>
+            <span class="code-comment">&lt;!-- setting the password --&gt;</span>
+            <span class="code-tag">&lt;<span class="code-tag-name">property</span> <span class="code-attribute">name</span>=<span class="code-string">"javax.persistence.jdbc.password"</span> <span class="code-attribute">value</span>=<span class="code-string">"CSC280_people"</span> /&gt;</span>
+            <span class="code-comment">&lt;!-- this is an optional property it is useful debugging --&gt;</span>
+            <span class="code-comment">&lt;!-- it allows you to see the sql statements that got generated --&gt;</span>
+            <span class="code-tag">&lt;<span class="code-tag-name">property</span> <span class="code-attribute">name</span>=<span class="code-string">"hibernate.show_sql"</span> <span class="code-attribute">value</span>=<span class="code-string">"true"</span> /&gt;</span>
+        <span class="code-tag">&lt;/<span class="code-tag-name">properties</span>&gt;</span>
+    <span class="code-tag">&lt;/<span class="code-tag-name">persistence-unit</span>&gt;</span>   
+<span class="code-tag">&lt;/<span class="code-tag-name">persistence</span>&gt;</span>
+          </code>
+      </pre>
       </section>
       <section id="work-day">
         <h3>Work Day</h3>

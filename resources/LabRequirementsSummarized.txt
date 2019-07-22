@@ -80,8 +80,8 @@ FLIGHTS: CRUD
 	  - SeatingCapacity: int
 	  # will be stored in epoch milli's
           - TakeOfDateTime: long 
-	  - SourceAirport: AIRPORT
-          - DestinationAirport: AIRPORT
+	  - SourceAirport: Airport
+          - DestinationAirport: Airport
 	  - CurrentAmountOfSeats: int
 	  # will be stored as minutes offset.
           - LengthOfTrip: long	
@@ -106,7 +106,7 @@ SALES: CRUD
 	ATTRS:
 	  - Flight: Flight
 	  - AmountOfTickets: int
-	  - PaymentInfo: CARD_INFO
+	  - PaymentInfo: cardInfo
           - FullName: string
 	  - Email: string
 	  - StreetAddress: string

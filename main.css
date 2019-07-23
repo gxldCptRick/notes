@@ -12,7 +12,8 @@ h5 {
 }
 
 div.code,
-pre code {
+pre code,
+code {
   display: inline;
   font-family: "Share Tech Mono", monospace;
 }
@@ -24,7 +25,7 @@ pre code {
   padding: 1%;
   overflow: scroll;
 }
-span.code-keyword {
+.code-keyword {
   color: #df7700;
 }
 
@@ -41,62 +42,62 @@ iframe.json-view {
   font-size: 1.1em;
 }
 
-span.code-doctype-value {
+.code-doctype-value {
   color: #999;
 }
 
-span.code-tag-name {
+.code-tag-name {
   color: #aa0033;
 }
 
-span.code-special {
+.code-special {
   color: #750035;
 }
 
-span.code-doctype {
+.code-doctype {
   color: #666;
 }
 
-span.code-primitive {
+.code-primitive {
   color: #171be8;
 }
 
-span.code-jsp-tag {
+.code-jsp-tag {
   color: #e6b449;
 }
 
-span.code-attribute {
+.code-attribute {
   color: #62017a;
 }
 
-span.code-tag {
+.code-tag {
   color: blue;
 }
 
-span.code-this {
+.code-this {
   color: #0e1d80;
 }
 
-span.code-annotation {
+.code-annotation {
   color: #3300aa;
 }
 
-span.code-string {
+.code-string {
   color: green;
 }
 
-span.code-comment {
+.code-comment {
   color: #555;
 }
 
-span.code-new {
+.code-new {
   color: #c001af;
 }
-span.code-identifier {
+.code-identifier {
   color: #3300aa;
 }
 
-span.code-class {
+.code-class {
   color: #0000aa;
 }
 

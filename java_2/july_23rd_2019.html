@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Java 2 Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans|Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>July 23rd 2019</h1>
+      <h2>What we covered</h2>
+      <nav class="topics">
+        <ul>
+          <li><a href="#no-class">No Class</a></li>
+          <li><a href="#entity">Making Entities</a></li>
+          <li><a href="#entity-manager">Using Entity Manager</a></li>
+          <li><a href="#config-fix">Configuration Fixes</a></li>
+        </ul>
+      </nav>
+      <a href="../resources/entity-manager-demo.zip" type="application/zip"
+        >Link To Demo Zip :)</a
+      >
+    </header>
+    <main>
+      <section id="no-class">
+        <h3>No Class On Friday!!</h3>
+        <p>
+          So Mr. Cox decided to not have us show up on friday so yay we will be
+          able to relax and stuff.
+        </p>
+      </section>
+      <section id="entity">
+        <h3>Making Entities</h3>
+        <p>
+          We Learned how to create objects that we can store in the entity
+          manager. You see with JPA there are annotations that you need in order
+          for it to hook up correctly to the database and to validate that those
+          columns and fields exist. It is actually really cool and actually
+          works like entity framework does in the sense of the code first thing
+          where you mark up the entire class with the tags and blam it just
+          knows how to create sql statements
+        </p>
+        <pre>
+            <code>
+<span class="code-keyword">package</span> com.gxldcptrick.model;
+
+<span class="code-keyword">import</span> javax.persistence.<span class="code-class">Column</span>;
+<span class="code-keyword">import</span> javax.persistence.<span class="code-class">Entity</span>;
+<span class="code-keyword">import</span> javax.persistence.<span class="code-class">Id</span>;
+<span class="code-keyword">import</span> javax.persistence.<span class="code-class">Table</span>;
+
+<span class="code-comment">// marks the class as an entity so that it can be used with JPA stuff</span>
+<span class="code-annotation">@Entity</span>
+<span class="code-comment">// marks the table that this class is referring too.</span> 
+<span class="code-annotation">@Table</span>(<span class="code-attribute">name</span>=<span class="code-string">"person"</span>)
+<span class="code-keyword">public class</span> <span class="code-class">Person</span> {
+    <span class="code-comment">// marks the primary key for the class</span>
+    <span class="code-annotation">@Id</span>
+    <span class="code-keyword">private</span> <span class="code-primitive">int</span> <span class="code-identifier">id</span>;
+    <span class="code-comment">// marks a column so that you can add some sql validation for the values</span>
+    <span class="code-annotation">@Column</span>(<span class="code-attribute">nullable</span>=<span class="code-special">false</span>)
+    <span class="code-keyword">private</span> <span class="code-primitive">int</span> <span class="code-identifier">age</span>;
+
+    <span class="code-comment">// the name field is for when you want to map the field to a different name in the database</span>
+    <span class="code-annotation">@Column</span>(<span class="code-attribute">name</span>=<span class="code-string">"fullname"</span>)
+    <span class="code-keyword">private</span> <span class="code-class">String</span> <span class="code-identifier">name</span>;
+    <span class="code-comment">// you need a default constructor so that the framework can create an instance of you object</span>
+    
+    <span class="code-keyword">public</span> <span class="code-class">Person</span>() {
+        <span class="code-this">this</span>(<span class="code-string">"DEFAULT"</span>, -1);
+    }
+
+    <span class="code-keyword">public</span> <span class="code-class">Person</span>(<span class="code-class">String</span> <span class="code-identifier">name</span>, <span class="code-primitive">int</span> <span class="code-identifier">age</span>){
+        setAge(<span class="code-identifier">age</span>);
+        setName(<span class="code-identifier">name</span>);
+        setId(-1);
+    }
+    <span class="code-comment">/*
+     * 
+     * You need to create getters and setters for each of the column fields
+     * 
+     * */</span>
+    <span class="code-keyword">public</span> <span class="code-primitive">int</span> <span class="code-identifier">getAge</span>() {
+        <span class="code-keyword">return</span> <span class="code-identifier">age</span>;
+    }
+    <span class="code-keyword">public void</span> <span class="code-identifier">setAge</span>(<span class="code-primitive">int</span> <span class="code-identifier">age</span>) {
+        <span class="code-this">this</span>.age = <span class="code-identifier">age</span>;
+    }
+    <span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-identifier">getName</span>() {
+        <span class="code-keyword">return</span> <span class="code-identifier">name</span>;
+    }
+    <span class="code-keyword">public void</span> <span class="code-identifier">setName</span>(<span class="code-class">String</span> <span class="code-identifier">name</span>) {
+        <span class="code-this">this</span>.name = <span class="code-identifier">name</span>;
+    }    
+    <span class="code-keyword">public</span> <span class="code-primitive">int</span> <span class="code-identifier">getId</span>() {
+        <span class="code-keyword">return</span> <span class="code-identifier">id</span>;
+    }
+    <span class="code-keyword">public void</span> <span class="code-identifier">setId</span>(<span class="code-primitive">int</span> <span class="code-identifier">id</span>) {
+        <span class="code-this">this</span>.id = <span class="code-identifer">id</span>;
+    }
+    <span class="code-comment">// for debugging reasons</span>
+    <span class="code-annotation">@Override</span>
+    <span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-identifier">toString</span>() {
+        <span class="code-keyword">return</span> <span class="code-class">String</span>.format(<span class="code-string">"%s (%d)"</span>, <span class="code-identifier">getName</span>(), <span class="code-identifier">getAge</span>());
+    }
+} 
+            </code>
+        </pre>
+        <p>
+          As you can see we have to mark the entire class with the
+          <code class="code-annotation">@Entity</code> attribute in order for
+          jpa to recognize this can be saved in the database. We use the
+          <code class="code-annotation">@Table</code> attribute so that we can
+          have it use an alternate table name so that means we can have it talk
+          to a table that is a totally different name than the class we use. We
+          then begin adding fields for the table with just simple java
+          properties. You need to make sure you follow convention or else you
+          are going to have a bad time. That means private fields are lower
+          cammel case and that getters and setters are just getFieldName()
+          setFieldName(Type fieldName). with fields you can optionally mark the
+          field with <code class="code-annotation">@Column</code>
+          so that if you need to change the name of the field to be more
+          database compliant or even if you need to make sure you validate that
+          a field is not null. This is all you actually ever need to do in order
+          to make an object that you can be used with JPA
+        </p>
+      </section>
+      <section id="entity-manager">
+        <h3>Entity Manager</h3>
+        <p>
+          Next we learned a little bit about Entity Manager and just started
+          getting some stuff in a Servlet and adding to the database.
+        </p>
+        <pre>
+            <code>
+<span class="code-class">EntityManagerFactory</span> <span class="code-identifier">emf</span> = <span class="code-class">Persistence</span>.createEntityManagerFactory(<span class="code-string">"ps"</span>);
+<span class="code-class">EntityManager</span> <span class="code-identifier">manager</span> = <span class="code-identifier">emf</span>.createEntityManager();
+<span class="code-keyword">var</span> <span class="code-identifier">person1</span> = <span class="code-new">new</span> <span class="code-class">Person</span>(<span class="code-string">"joe"</span>, 11);
+<span class="code-keyword">var</span> <span class="code-identifier">person2</span> = <span class="code-new">new</span> <span class="code-class">Person</span>(<span class="code-string">"jill"</span>, 12);
+<span class="code-identifier">manager</span>.persist(<span class="code-identifier">person1</span>);
+<span class="code-identifier">manager</span>.persist(<span class="code-identifier">person2</span>);
+            </code>
+        </pre>
+        <p>
+          Basically what you need to do is use the
+          <code class="code-class">Persistence</code> object so that you can
+          have it build you a factory for the entity manager from the
+          configuration that we defined in the persistence.xml. If you can
+          remember from the file yesterday we had named our manager configs to
+          be ps so that is the string we give this thing. it then creates
+          factory that we will be able to use to make entity manager that hookup
+          to our database. Then we use the factory to create a single manager.
+          with the manager we can then add two
+          <code class="code-class">Person</code> objects and then blammo we
+          actually just saved two new entities into the database easy right?
+          Anyway that is essentially how using hibernate natively works we have
+          tell it to persist objects and then it figures out what kind of
+          statement it needs to do in order to make that work
+        </p>
+        <pre>
+            <code>
+<span class="code-class">EntityManagerFactory</span> <span class="code-identifier">emf</span> = <span class="code-class">Persistence</span>.createEntityManagerFactory(<span class="code-string">"ps"</span>);
+<span class="code-class">EntityManager</span> <span class="code-identifier">manager</span> = <span class="code-identifier">emf</span>.createEntityManager();
+<span class="code-class">CriteriaBuilder</span> <span class="code-identifier">builder</span> = <span class="code-identifier">manager</span>.getCriteriaBuilder();
+<span class="code-keyword">Query</span>&lt;<span class="code-keyword">Person</span>&gt; <span class="code-identifier">query</span> = <span class="code-identifier">builder</span>.createQuery(<span class="code-class">Person</span>.class);
+<span class="code-identifier">manager</span>.createQuery(<span class="code-identifier">query</span>);
+            </code>
+        </pre>
+        <p>
+          So I want to be honest with you I stopped paying attention like right
+          after the adding bit so this stuff is what I was researching when I
+          was not paying attention. Basically you make the entity manager again
+          just like last time passing in
+          <code class="code-string">"ps"</code> so that it will load the configs
+          we defined beforehand. Then we use the manager to create a
+          CriteriaBuilder which we will use to actually make the query that we
+          want to do on the database. Then I just told the manager to create
+          from what I made.
+        </p>
+        <p>
+          He said that since we will revisit this again on Thursday so hopefully
+          you will be able to come see it and fix any problems that you may have
+          encountered
+        </p>
+      </section>
+      <section id="config-fix">
+        <h3>Fixing the configs</h3>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Java 2 Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans|Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>August 5th 2019</h1>
+      <h2>What we covered</h2>
+      <nav class="topics">
+        <ul>
+          <li><a href="#spring-config">Spring Configurations</a></li>
+          <li><a href="#run-baby-run">Running a Spring Application</a></li>
+          <li><a href="#testing-app">Testing the Routes</a></li>
+        </ul>
+      </nav>
+      <a
+        href="../resources/QuintanillaA_exercise-log.zip"
+        type="application/zip"
+        >Link To Demo Zip</a
+      >
+    </header>
+    <main>
+      <section id="spring-config">
+        <h3>Spring Configurations</h3>
+        <p>
+          So Today Mr. Cox was started off with a quick refresher about what
+          each of the things we needed to do in order to fix up the application
+          and have it fully run. We started with just double check the
+          application.properties. So before we could actually do anything useful
+          we went and finished up relating the two entities that we had
+          together. We added a List&lt;Set&gt; to the Exercise and made sure to
+          add an Exercise to the Set. With these two things we could start
+          building out the stuff.
+        </p>
+        <p>
+          So the first thing we had to actually change was to add a new
+          annotation to the parameters of the method we call for the post. We
+          will use the <span class="code-annotation">@RequestBody</span> to tell
+          spring boot to create the object from the values in the body.
+        </p>
+        <pre>
+          <code>
+<span class="code-annotation">@RequestMapping</span>(<span class="code-string">path</span>=<span class="code-string">""</span>, <span class="code-attribute">method</span>=<span class="code-class">RequestMethod</span>.POST)
+<span class="code-keyword">public</span> <span class="code-class">Integer</span> <span class="code-identifier">createExercise</span>(<span class="code-attribute">@RequestBody</span> <span class="code-class">Exercise</span> <span class="code-identifier">exercise</span>) {
+  <span class="code-identifier">exerciseJpaRepository</span>.saveAndFlush(<span class="code-identifier">exercise</span>);
+  <span class="code-keyword">return</span> <span class="code-identifier">exercise</span>.getId();
+}
+          </code>
+        </pre>
+        <p>
+          So this would be how we changed the createExercise method to be able
+          to properly accept the objects being posted to it.
+        </p>
+        <p>
+          After this little bit of configuration we will need to update the our
+          main method with a few more annotations. We will need to add the
+          <span class="code-annotation">@ComponentScan</span> so that we can
+          have spring boot scan our package for "beans" or objects that we have
+          defined as needing a dependency. Basically it figures out what stuff
+          is auto-wired or is being used in someway and then creates it then and
+          there. We will also need to add the
+          <span class="code-annotation">@EnableAutoConfiguration</span> so that
+          we can have it give default values for the values.
+        </p>
+        <pre>
+          <code>
+<span class="code-keyword">import</span> org.springframework.boot.<span class="code-class">SpringApplication</span>;
+<span class="code-keyword">import</span> org.springframework.boot.autoconfigure.<span class="code-class">EnableAutoConfiguration</span>;
+<span class="code-keyword">import</span> org.springframework.boot.autoconfigure.<span class="code-class">SpringBootApplication</span>;
+<span class="code-keyword">import</span> org.springframework.boot.web.servlet.support.<span class="code-class">SpringBootServletInitializer</span>;
+<span class="code-keyword">import</span> org.springframework.context.annotation.<span class="code-class">ComponentScan</span>;
+
+<span class="code-annotation">@SpringBootApplication
+@ComponentScan
+@EnableAutoConfiguration</span>
+<span class="code-keyword">public class</span> <span class="code-class">ExerciseLogApplication</span> <span class="code-keyword">extends</span> <span class="code-class">SpringBootServletInitializer</span> {
+    <span class="code-keyword">public static void</span> <span class="code-identifier">main</span>(<span class="code-class">String</span>[] <span class="code-identifier">args</span>) {
+        <span class="code-class">SpringApplication</span>.run(<span class="code-class">ExerciseLogApplication</span>.<span class="code-keyword">class</span>, <span class="code-identifier">args</span>);
+    }
+}
+          </code>
+        </pre>
+        <p>
+          After setting those up you should be able to run your application.
+        </p>
+      </section>
+      <section id="run-baby-run">
+        <h3>Running a Spring Application</h3>
+        <p>
+          So for running the application all you have to do is just run it just
+          like any other java app. Under the hood Spring Boot is creating and
+          spinning up a tomcat server that will serve all the servlets. Give it
+          time and if it just prints out simple stuff in the console then
+          everything was hooked up correctly and hurray it works if not then you
+          will need to do some debugging
+        </p>
+        <p>
+          The most common problems that you will face if any will probably be
+          sql related so just make sure you line up the properties again if it
+          is the driver. If it is something to deal with the configurations like
+          something like it can't find something double check that you have
+          marked all the controllers correctly. We actually had a simple bug
+          today because he used set and apparently that is a reserved word in
+          MariaDB
+        </p>
+      </section>
+      <section id="testing-app">
+        <h3>Testing the Routes</h3>
+        <p>
+          To test the application and make sure everything is working fine you
+          should use postman to make the requests. An easy way to test the
+          Exercise Controller is to post directly to that route.
+        </p>
+        <div class="frame">
+          <img
+            src="https://i.imgur.com/AFiaB5M.png"
+            alt="Postman to post to a route"
+          />
+          <p>This is how you would make a specific kind of request</p>
+        </div>
+        <p>
+          After going to the post for postman you will then need to go into the
+          body and set it equal to raw text. After that you can set it up so
+          that you can have the text be read as json so do that so the server
+          understands what it is. After that fill out the information that you
+          will need to make an exercise. Don't worry about creating a set right
+          now because for restful services we want to make things as small and
+          as quick as possible. Because we want to do this we only focus on the
+          smallest amount of work that can be done safely in this case it would
+          be creating a exercise with a name.
+        </p>
+        <div class="frame">
+          <img
+            src="https://i.imgur.com/kMfpH2X.png"
+            alt="Filled out form of posting to the route"
+          />
+          <p>
+            Filled out form of posting to the route.
+          </p>
+        </div>
+        <p>
+          After all of this just hit the route and then blam if we get a 200
+          then we did everything right if not then we will have to go around
+          doing figuring out what went wrong on the server side.
+        </p>
+        <p>
+          Sometimes posting to a route raw is useful and honestly the majority
+          of the work will be fine to be designed that way. However there will
+          be a time in which just posting to a route blindly will not work
+          because of the relationship of the data such as creating a Set. So we
+          will use paths variables. In order to use path variables we will need
+          to define them in the path attribute inside the
+          <span class="code-annotation">@RequestMapping</span> attribute to
+          reflect it. For this we are going to modify the string for the post of
+          the SetController. This is the route we will use the route instead.
+          <span class="code-string">"/exercise/{exerciseId}"</span> the square
+          brackets are what we use to define the variable and we will have to
+          match the variable name in the path with on in our method so we will
+          need to add a variable to take in this parameter. To do this correctly
+          we will use the
+          <span class="code-attribute">@PathVariable</span> attribute to mark
+          the parameter as something that we will get from the route. This is
+          all you need to do to have your own custom path variables
+        </p>
+        <pre>
+          <code>
+<span class="code-annotation">@Autowired</span>
+<span class="code-keyword">private</span> <span class="code-class">SetJpaRepository</span> <span class="code-identifier">setJpaRepository</span>;
+
+<span class="code-annotation">@Autowired</span>
+<span class="code-keyword">private</span> <span class="code-class">ExerciseRestController</span> <span class="code-identifier">exerciseRestController</span>;
+
+<span class="code-annotation">@RequestMapping</span>(<span class="code-attribute">path</span>=<span class="code-string">"/exercise/{exerciseId}"</span>, <span class="code-attribute">method</span>=<span class="code-class">RequestMethod</span>.POST)
+<span class="code-keyword">public</span> <span class="code-class">Integer</span> <span class="code-identifier">createSet</span>(<span class="code-attribute">@PathVariable</span> <span class="code-primitive">int</span> <span class="code-identifier">exerciseId</span>, <span class="code-attribute">@RequestBody</span> <span class="code-class">Set</span> <span class="code-identifier">set</span>) {
+  <span class="code-class">Exercise</span> <span class="code-identifier">exercise</span> = <span class="code-identifier">exerciseRestController</span>.getById(<span class="code-identifier">exerciseId</span>);
+  <span class="code-identifier">set</span>.setExercise(<span class="code-identifier">exercise</span>);
+  <span class="code-identifier">setJpaRepository</span>.saveAndFlush(<span class="code-identifier">set</span>);
+  <span class="code-keyword">return</span> <span class="code-identifier">set</span>.getId();
+}
+          </code>
+        </pre>
+        <p>Thats about the gist of what was covered today.</p>
+      </section>
+    </main>
+    <footer>
+      <h2 class="back-again"><a href="../index.html">Go Back</a></h2>
+    </footer>
+  </body>
+</html>

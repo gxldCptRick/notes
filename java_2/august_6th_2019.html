@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Java 2 Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans|Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>August 5th 2019</h1>
+      <h2>What we covered</h2>
+      <nav class="topics">
+        <ul>
+          <li><a href="#rest">CRUD For REST</a></li>
+          <li>
+            <a href="#exception">How To Tell Spring to Handle Exceptions</a>
+          </li>
+        </ul>
+      </nav>
+      <a href="#idontknowanymore" type="application/zip">Link To Demo Zip</a>
+    </header>
+    <main>
+      <section id="rest">
+        <h3>CRUD For REST</h3>
+        <p>Create is done with the POST</p>
+        <p>Read is done with GET</p>
+        <p>Update is down with both PUT and PATCH</p>
+        <p>Delete is down with DELETE</p>
+        <p>
+          We focused on The first two last time and so this time we began our
+          work on updating and deleting from specifically Exercise.
+        </p>
+        <p>
+          To start our work we had to fix an issue that came up last time. When
+          we got the exercises from the server they had sets and as you may
+          hopefully remember we added the exercise as a property for our set.
+          but hey exercises uses sets and hey sets have exercises and I hope you
+          can see where I am going with this. Long story short we have to decide
+          the way we want to access the relationship. Mr. Cox decided that we
+          should ignore the property on the set object. To ignore a property in
+          the serialization since we are using jackson all we have to do is use
+          the jackson property of
+          <span class="code-annotation">@JsonIgnore</span>.
+        </p>
+        <p>
+          After fixing this issue we began working towards updating the exercise
+          controller to delete and update exercises. To make it delete we have
+          to decide what it has to do. We decide in order to delete an entity
+          all we need is the id. So we use the path to hold a variable for the
+          id. so our method signature will look a little something like this.
+        </p>
+        <pre>
+            <code>
+<span class="code-annotation">@RequestPath</span>(<span class="code-attribute">path</span>=<span class="code-string">"/{id}"</span>,<span class="code-attribute">method</span>=<span class="code-class">HttpRequest</span>.DELETE)
+public void deleteExercise(<span class="code-annotation">@PathVariable</span> <span class="code-primitive">int</span> <span class="code-identifier">id</span>){
+    etc... 
+            </code>
+        </pre>
+        <p>
+          We mark up the path the way we want to use it. We make sure to line up
+          the name of the path variable with a parameter. Lastly we just fill in
+          the method the way we need too.
+        </p>
+        <p>
+          Updating will be a little more difficult. So there will be to versions
+          of updating. The first way we approached it was the totally update. In
+          order to totally update the record we will be needing an id and an
+          object that will replace it. So what is gonna happen is we use the id
+          to fetch the record from the database. Then after fetching we will
+          merge both the records together. Mr. Cox suggest that since we are
+          accessing the fields we should leave the responsibility of the merge
+          into the the class that you are merging. i.e. if i'm trying to merge
+          an exercise I will have the code in exercise. For total updates it is
+          recommended that you use the HTTP PUT method.
+        </p>
+        <p>
+          The other way we can update is if only have parts that we update. In
+          order to do this effectively we will need an id and we will also need
+          a map of string and object. The reason why we have a map of string and
+          object is because we want to represent all javascript object. Then,
+          like last time, fetch the existing record and then for each over each
+          of the key value pairs and fill in the matching fields. Mr. Cox
+          suggested that we do a little reflection to get this done but didn't
+          have enough time to show us how. Also the example we used, exercise,
+          is not the best because it really only has one field to modify. The
+          HTTP method recommended is PATCH for this kind of update.
+        </p>
+      </section>
+      <section id="exception">
+        <h3>How to Tell Spring How to Handle Exceptions</h3>
+        <p>
+          Spring is really cool because it handles a lot of exceptions for us.
+          However it still lacks the foresight to be able to cover every
+          possible use case. In our case we actually have no way to tell the
+          user of our api that we couldn't find a record easily. So why not make
+          a special exception to mark when we couldn't find something.
+        </p>
+        <p>
+          In spring boot we can create a class that will hold the logic of how
+          to handle the exception.
+        </p>
+        <pre>
+            <code>
+<span class="code-keyword">import</span> org.springframework.web.context.request.<span class="code-class">WebRequest</span>;
+<span class="code-annotation">@ControllerAdvice</span>
+<span class="code-keyword">public class</span> <span class="code-class">ExceptionConfiguration</span> <span class="code-keyword">extends</span> <span class="code-class">ResponseEntityExceptionHandler</span>
+    <span class="code-annotation">@ExceptionHandler</span>(<span class="code-attribute">value</span>=<span class="code-class">CustomException</span>.<span class="code-keyword">class</span>)
+    <span class="code-keyword">public</span> <span class="code-class">ResponseEntity</span>&lt;<span class="code-class">Object</span>&gt; <span class="code-identifier">howToHandleException</span>(
+            <span class="code-class">NoSuchEntityException</span> <span class="code-identifier">ex</span>,
+            <span class="code-class">WebRequest</span> <span class="code-identifier">request</span>){
+                <span class="code-comment">//etc...</span>
+            </code>
+        </pre>
+        <p>
+          In this class you define what kind of ResponseEntity you want to
+          return of what type we want to. The simplest form is to just make an
+          object passing in the exception and setting the status to one of the
+          predefined statuses.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <h2 class="back-again"><a href="../index.html">Go Back</a></h2>
+    </footer>
+  </body>
+</html>

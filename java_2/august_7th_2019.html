@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Java 2 Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans|Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>August 5th 2019</h1>
+      <h2>What we covered</h2>
+      <nav class="topics">
+        <ul>
+          <li><a href="#query">How To Query with Spring</a></li>
+          <li><a href="#work">Work Day</a></li>
+        </ul>
+      </nav>
+      <a href="../resources/exercise-log.zip" type="application/zip"
+        >Link To Demo Zip</a
+      >
+    </header>
+    <main>
+      <section id="query">
+        <h3>How To Query with Spring</h3>
+        <p>
+          So last time I am pretty sure I forgot to make something about
+          querying into spring so since we have fully covered it I will go over
+          it now. In Spring to query we actually have a really cool thing called
+          <em>AUTO GENERATED QUERIES</em>. these
+          <em>AUTO GENERATED QUERIES</em> allow us to construct an english
+          sentence to build out sql queries to get a specific action from the
+          database. We make <em>AUTO GENERATED QUERIES</em> by adding them as
+          methods on the Repository that we want to work with. All
+          <em>AUTO GENERATED QUERIES</em> start with findBy which tells spring
+          "Hey I need you to make a query for me". Then we have to specify what
+          we want to match on. The simplest query we can make is to just target
+          a single field. For example with our exercise we can query on the name
+          of it by just telling it findByName and then bam you will now have a
+          method that will find a exercise by the name.
+        </p>
+        <pre>
+            <code>
+<span class="code-keyword">public</span> <span class="code-class">List</span>&lt;<span class="code-class">Exercise</span>&gt; <span class="code-identifier">findByName</span>(<span class="code-class">String</span> <span class="code-identifier">name</span>);
+            </code>
+        </pre>
+        <p>
+          We can make a more complex query with logical operators such as
+          <em>And</em> we can also look for stuff in collections too with
+          <em>Contains</em>. There is so many cool things we can even take it as
+          far as setting up a fuzzy search with the like operator.
+        </p>
+        <pre>
+            <code>
+<span class="code-keyword">public</span> <span class="code-class">List</span>&lt;<span class="code-class">Exercise</span>&gt; <span class="code-identifier">findByNameLikeAndSetsContains</span>(<span class="code-class">String</span> <span class="code-identifier">name</span>, <span class="code-class">Set</span> <span class="code-identifier">set</span>);
+            </code>
+        </pre>
+        <p>
+          Sometimes we need more fine tuned control over the way we query the
+          database. So we use the <span class="code-annotation">@Query</span> to
+          specify the <em>JPQL</em>. It is an important distinction because we
+          are querying on objects not tables in the database so make sure that
+          you use field names not column names. When we need to add a variable
+          to <em>JPQL</em> we use named parameters. the relative look of them
+          are just ":identifer" so that means in our example we will make one
+          called name. in order for us to fill in that query we will need to
+          pass in a parameter to the query to fill it out. We mark that
+          parameter with the <span class="code-annotation">@Param</span> and
+          then pass it in the string name of the identifier that you used.
+        </p>
+        <pre>
+            <code>
+<span class="code-annotation">@Query</span>(<span class="code-string">"SELECT e "</span>+
+        <span class="code-string">"FROM Exercise e "</span> +
+        <span class="code-string">"WHERE e.name LIKE :name"</span>)
+<span class="code-keyword">public</span> <span class="code-class">List</span>&lt;<span class="code-class">Exercise</span>&gt; <span class="code-identifier">queryByNameLike</span>(
+    <span class="code-annotation">@Param</span>(<span class="code-string">"name"</span>) <span class="code-class">String</span> <span class="code-identifier">name</span>);
+            </code>
+        </pre>
+        <p>
+          Other times we need to go even further beyond and in fact write raw
+          sql queries to get a very specific query if the database is really
+          rank. In order to do this we will reuse that same annotation
+          <span class="code-annotation">@Query</span> but we will have to add a
+          couple more things to make this work. We will need to give it a value
+          and set that equal to the actual query we want to make. Then we will
+          have to mark it as a <em>nativeQuery</em> by setting that to
+          <em>true</em>. That is all you need in order to make a very specific
+          query in sql.
+        </p>
+        <pre>
+        <code>
+<span class="code-annotation">@Query</span>(
+    <span class="code-attribute">value</span>=<span class="code-string">"SELECT * FROM exercise e WHERE e.name like '%blah%'"</span>, 
+    <span class="code-attribute">nativeQuery</span>=<span class="code-special">true</span>)
+<span class="code-keyword">public</span> <span class="code-class">List</span>&lt;<span class="code-class">Exercise</span>&gt; <span class="code-identifier">queryBySuperComplexNative</span>();
+        </code>
+        </pre>
+        <p>
+          There is way more than I can teach you about this so you should
+          totally google:
+          <a href="https://lmgtfy.com/?q=Spring+automated+queries"
+            >Spring Automated Queries</a
+          >
+          Just so you can see the power of the automated queries in Spring.
+        </p>
+      </section>
+      <section id="work">
+        <h3>Work Day</h3>
+        <p>
+          Other than the query stuff we didn't really cover anything else today.
+          It was a work today and Mr. Cox said that we should expect workdays
+          for the rest of the week so hopefully that will be able to ease your
+          mind.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <h2 class="back-again"><a href="../index.html">Go Back</a></h2>
+    </footer>
+  </body>
+</html>

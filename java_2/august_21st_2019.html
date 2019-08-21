@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Java 2 Notes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans|Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>August 5th 2019</h1>
+      <h2>What we covered</h2>
+      <nav class="topics">
+        <ul>
+          <li><a href="#deploy">Deployments</a></li>
+          <li><a href="#work">Work Day</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="deploy">
+        <h2>Deploying To Tomcat</h2>
+        <p>
+          To deploy to Tomcat it is really really easy all you just have to
+          follow a couple of steps
+        </p>
+        <ol>
+          <li><a href="#build"> Build Project</a></li>
+          <li><a href="#package">Package the Project with Maven</a></li>
+          <li><a href="#tomcat">Publish on Tomcat</a></li>
+        </ol>
+        <div id="build">
+          <h3>Build Project</h3>
+          <p>
+            Just like you would always just make sure you build the project so
+            that you can be sure that the code will run on the server
+          </p>
+        </div>
+        <div id="package">
+          <h3>Package with Maven</h3>
+          <p>
+            After your successful build you will then have Two ways to package
+            the project. You will either use the maven command line or you can
+            right click on the project and go to run as and run it as a maven
+            build. If you decide the right click method you will have to just
+            tell maven what goals to run for this build. Both of the ways will
+            have the same Goals. You will specify <code>clean install</code> in
+            that exact spelling and casing. If you decide to run with the
+            command line you will have to open the command line to the directory
+            that contains your pom file and run "<code>mvn clean install</code>"
+          </p>
+        </div>
+        <div id="tomcat">
+          <h3>Deploying to tomcat</h3>
+          <p>
+            So in order to deploy to tomcat you will have to know exactly where
+            on disk tomcat is installed. You will have to navigate to its folder
+            and find the webapps folder. After you find it you will have to go
+            back to your project and look for the target folder. In the target
+            folder you should have a war file if not then just go back a step
+            and run those commands. Then copy the war file into the webapps
+            folder of your tomcat installation. After that it should work
+            magically. To access the application you will need to go to
+            https://localhost:8080/&lt;name of war file&gt;/&lt;actual servlet
+            path&gt;
+          </p>
+        </div>
+        <div id="disclaimer">
+          <h3>Be Careful</h3>
+          <p>
+            May not be able to have the app run the first time. If you have
+            issues it will probably with the database connections. To make the
+            smoothest possible deploy make sure that the server that you are
+            running and installing tomcat on is also running the database as
+            well. If not make sure that you can give network access for the
+            tomcat server to access the database server. If you are having
+            problems running the application you can also check the logs of the
+            tomcat instance. The log files are located on the install in the
+            logs folder. The log files that you should care about are called
+            STDOUT for standard output, STDERR for the errors, Catalina which is
+            another file that is where most of the servers are outputting into.
+            In linux you will only ever need to go into the Catalina file but
+            for windows you will need to go to all three.
+          </p>
+        </div>
+      </section>
+      <section id="work">
+        <h2>Work Day</h2>
+        <p>
+          After the short introduction to how to deploy web-apps to a running
+          instance of Tomcat we basically got let loose to continue to work on
+          stuffs.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <h2 class="back-again"><a href="../index.html">Go Back</a></h2>
+    </footer>
+  </body>
+</html>
